@@ -187,3 +187,27 @@ Consider defining a bean of type 'AppService.UserService' in your configuration.
 2026-06-05 16:44:49 INFO  I.DesktopApplication : Started DesktopApplication in 2.589 seconds (process running for 2.866)
 2026-06-05 16:45:22 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
 2026-06-05 16:45:22 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:54:20 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 5064 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:54:20 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:54:21 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:54:21 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:54:21 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:54:22 INFO  I.DesktopApplication : Started DesktopApplication in 2.61 seconds (process running for 2.887)
+2026-06-05 16:55:44 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:55:44 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:56:10 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 20872 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:56:10 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:56:11 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:56:11 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:56:11 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:56:12 INFO  I.DesktopApplication : Started DesktopApplication in 2.64 seconds (process running for 2.914)
+2026-06-05 16:56:24 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:56:24 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 17:40:43 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 22980 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 17:40:43 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 17:40:44 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 17:40:44 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@325162e9
+2026-06-05 17:40:44 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 17:40:45 INFO  I.DesktopApplication : Started DesktopApplication in 2.599 seconds (process running for 2.877)
+2026-06-05 17:43:39 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 17:43:39 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.

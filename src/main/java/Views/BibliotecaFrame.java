@@ -58,6 +58,12 @@ public class BibliotecaFrame extends JFrame {
         menu.add(adicionar);
         menu.add(sair);
 
+        sair.addActionListener(e -> {
+            LoginFrame login = new LoginFrame(userService, bookService);
+            login.setVisible(true); // Garante que a tela de login vai aparecer na frente
+            dispose(); // Destrói a tela da biblioteca
+        });
+
         JPanel topo = new JPanel(new BorderLayout());
         JLabel tituloPrincipal = new JLabel("Biblioteca Digital");
         tituloPrincipal.setFont(new Font("Segoe UI", Font.BOLD, 30));
