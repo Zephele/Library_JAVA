@@ -105,3 +105,85 @@ Consider defining a bean of type 'AppService.UserService' in your configuration.
 2026-06-05 14:08:22 INFO  I.DesktopApplication : Started DesktopApplication in 2.886 seconds (process running for 3.194)
 2026-06-05 14:10:47 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
 2026-06-05 14:10:47 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:04:32 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 10068 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:04:32 INFO  I.DesktopApplication : The following 1 profile is active: "dev"
+2026-06-05 16:04:33 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:04:33 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-06-05 16:04:33 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:04:34 DEBUG org.hibernate.SQL : create table profile (id integer not null auto_increment, creation_date datetime(6), is_active bit, name varchar(50) not null, primary key (id)) engine=InnoDB
+2026-06-05 16:04:34 DEBUG org.hibernate.SQL : create table user (id integer not null auto_increment, creation_date datetime(6), is_active bit, name varchar(255), password varchar(255), profile_id integer, username varchar(255), primary key (id)) engine=InnoDB
+2026-06-05 16:04:34 INFO  I.DesktopApplication : Started DesktopApplication in 2.656 seconds (process running for 2.934)
+2026-06-05 16:04:39 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:41 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:41 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:42 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:42 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:42 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:49 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:50 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:50 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:51 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:51 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:51 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:52 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:52 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:52 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:53 DEBUG org.hibernate.SQL : select u1_0.id,u1_0.creation_date,u1_0.is_active,u1_0.name,u1_0.password,u1_0.profile_id,u1_0.username from user u1_0 where u1_0.username=? and u1_0.password=? and u1_0.is_active=true
+2026-06-05 16:04:54 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:04:54 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:13:07 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 6472 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:13:07 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:13:08 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:13:08 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@788e3702
+2026-06-05 16:13:08 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:13:10 INFO  I.DesktopApplication : Started DesktopApplication in 2.614 seconds (process running for 2.889)
+2026-06-05 16:13:58 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:13:58 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:14:04 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 14332 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:14:04 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:14:05 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:14:05 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ca4dce5
+2026-06-05 16:14:05 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:14:07 INFO  I.DesktopApplication : Started DesktopApplication in 2.631 seconds (process running for 2.906)
+2026-06-05 16:14:14 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:14:14 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:15:19 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 14332 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:15:19 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:15:20 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:15:20 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5fdd97c1
+2026-06-05 16:15:20 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:15:21 INFO  I.DesktopApplication : Started DesktopApplication in 2.653 seconds (process running for 2.929)
+2026-06-05 16:15:30 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:15:30 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:34:08 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 11868 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:34:08 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:34:09 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:34:09 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:34:09 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:34:11 INFO  I.DesktopApplication : Started DesktopApplication in 2.63 seconds (process running for 2.91)
+2026-06-05 16:35:00 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:35:00 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:35:04 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 19916 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:35:04 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:35:05 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:35:05 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:35:05 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:35:07 INFO  I.DesktopApplication : Started DesktopApplication in 2.587 seconds (process running for 2.868)
+2026-06-05 16:36:23 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:36:23 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:44:29 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 5348 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:44:29 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:44:30 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:44:30 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:44:30 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:44:31 INFO  I.DesktopApplication : Started DesktopApplication in 2.612 seconds (process running for 2.885)
+2026-06-05 16:44:40 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:44:40 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-06-05 16:44:46 INFO  I.DesktopApplication : Starting DesktopApplication using Java 25.0.3 with PID 18368 (C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA\target\classes started by Rafael Tanaka in C:\Users\Rafael Tanaka\Desktop\code\Library_JAVA)
+2026-06-05 16:44:46 INFO  I.DesktopApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-05 16:44:47 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-06-05 16:44:47 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e3db14
+2026-06-05 16:44:47 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-06-05 16:44:49 INFO  I.DesktopApplication : Started DesktopApplication in 2.589 seconds (process running for 2.866)
+2026-06-05 16:45:22 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-06-05 16:45:22 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.

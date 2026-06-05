@@ -2,14 +2,18 @@ package Views;
 
 import javax.swing.*;
 import AppService.UserService;
+import AppService.BookService; // Import adicionado
 import java.awt.*;
 
 public class CadastroFrame extends JFrame {
 
     private final UserService userService;
+    private final BookService bookService; // Serviço adicionado
 
-    public CadastroFrame(UserService userService) {
+    // Construtor agora pede os dois serviços
+    public CadastroFrame(UserService userService, BookService bookService) {
         this.userService = userService;
+        this.bookService = bookService;
 
         setTitle("Cadastro");
         setSize(900, 500);
@@ -52,12 +56,35 @@ public class CadastroFrame extends JFrame {
         JButton voltar = new JButton("Voltar");
         voltar.setBounds(100,380,300,40);
 
-        salvar.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Cadastro realizado!")
-        );
+        salvar.addActionListener(e -> {
+            String user = usuario.getText().trim();
+            String pass = new String(senha.getPassword()).trim();
+            String conf = new String(confirmar.getPassword()).trim();
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (!pass.equals(conf)) {
+                JOptionPane.showMessageDialog(this, "As senhas não coincidem!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                userService.cadastrar(user, pass);
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+                // Repassa os dois serviços ao abrir o Login novamente
+                new LoginFrame(userService, bookService);
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar no banco: " + ex.getMessage(), "Erro Crítico", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         voltar.addActionListener(e -> {
-            new LoginFrame(userService);
+            // Repassa os dois serviços ao abrir o Login novamente
+            new LoginFrame(userService, bookService);
             dispose();
         });
 

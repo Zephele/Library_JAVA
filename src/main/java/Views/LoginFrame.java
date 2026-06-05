@@ -1,6 +1,7 @@
 package Views;
 
 import AppService.UserService;
+import AppService.BookService;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -10,9 +11,11 @@ import java.awt.*;
 public class LoginFrame extends JFrame {
 
     private final UserService userService;
+    private final BookService bookService;
 
-    public LoginFrame(UserService userService) {
+    public LoginFrame(UserService userService, BookService bookService) {
         this.userService = userService;
+        this.bookService = bookService;
 
         setTitle("Biblioteca Digital");
         setSize(900, 500);
@@ -62,30 +65,30 @@ public class LoginFrame extends JFrame {
             String user = usuario.getText().trim();
             String pass = new String(senha.getPassword()).trim();
 
-            if (user.isEmpty() || pass.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Preencha usuário e senha.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
             if (user.equalsIgnoreCase("admin") && pass.equals("123")) {
-                JOptionPane.showMessageDialog(this, "Login de Administrador");
-                new BibliotecaFrame(true, userService);
+                // PASSE O BOOKSERVICE AQUI
+                new BibliotecaFrame(true, userService, bookService); 
                 dispose();
                 return;
             }
 
-            if (userService.login(user, pass)) {
-                JOptionPane.showMessageDialog(this, "Login realizado.");
-                new BibliotecaFrame(false, userService);
-                dispose();
-                return;
+            try {
+                if (userService.login(user, pass)) {
+                    // PASSE O BOOKSERVICE AQUI
+                    new BibliotecaFrame(false, userService, bookService);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception ex) {
+                // Se der erro de conexão com o banco, agora você verá a mensagem!
+                JOptionPane.showMessageDialog(this, "Falha de conexão com o Banco de Dados:\n" + ex.getMessage(), "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
-
-            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         });
 
         cadastrar.addActionListener(e -> {
-            new CadastroFrame(userService);
+            new CadastroFrame(userService, bookService); // <-- Precisa enviar os dois!
             dispose();
         });
 

@@ -1,5 +1,6 @@
 package Views;
 
+import AppService.BookService; // Adicionado
 import AppService.UserService;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,7 +15,10 @@ public class TestarBiblioteca {
                         .run(args);
 
         UserService userService = context.getBean(UserService.class);
+        // Pegando o BookService para a tela funcionar corretamente no teste
+        BookService bookService = context.getBean(BookService.class); 
 
-        SwingUtilities.invokeLater(() -> new BibliotecaFrame(true, userService));
+        // Passando os dois serviços
+        SwingUtilities.invokeLater(() -> new BibliotecaFrame(true, userService, bookService));
     }
 }
