@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 @Component
 public class LoginFrame extends JFrame {
@@ -13,49 +12,92 @@ public class LoginFrame extends JFrame {
     private final UserService userService;
 
     public LoginFrame(UserService userService) {
-        this.userService = userService; // O Spring injeta o serviço aqui automaticamente
+        this.userService = userService;
 
-        // Configurações básicas da Janela
-        setTitle("Sistema ODS - Autenticação");
-        setSize(400, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centra no ecrã
+        setTitle("Biblioteca Digital");
+        setSize(900, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Criando o painel principal
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        JPanel esquerda = new JPanel();
+        esquerda.setBackground(new Color(0, 121, 107));
+        esquerda.setPreferredSize(new Dimension(320, 500));
+        esquerda.setLayout(new GridBagLayout());
 
-        // Campos de texto e Labels
-        panel.add(new JLabel("Utilizador:"));
-        JTextField txtUsername = new JTextField();
-        panel.add(txtUsername);
+        JLabel logo = new JLabel(" BIBLIOTECA");
+        logo.setForeground(Color.WHITE);
+        logo.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        esquerda.add(logo);
 
-        panel.add(new JLabel("Palavra-passe:"));
-        JPasswordField txtPassword = new JPasswordField();
-        panel.add(txtPassword);
+        JPanel direita = new JPanel();
+        direita.setLayout(null);
+        direita.setBackground(Color.WHITE);
 
-        // Botão de Login
-        JButton btnLogin = new JButton("Entrar");
-        
-        // Ação de clique no botão
-        btnLogin.addActionListener((ActionEvent e) -> {
-            String user = txtUsername.getText();
-            // Aqui faríamos a validação. Para já, apenas testamos a injeção do serviço:
-            int totalUsuarios = userService.listarTodos().size();
-            
-            JOptionPane.showMessageDialog(this, 
-                "Tentativa de login: " + user + "\nTotal de utilizadores na base: " + totalUsuarios);
-            
-            // Futuramente, se a autenticação for bem-sucedida[cite: 51], 
-            // fechamos este frame e abrimos o DashboardFrame.
+        JLabel titulo = new JLabel("Login");
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        titulo.setBounds(180, 60, 200, 40);
+
+        JTextField usuario = new JTextField();
+        usuario.setBorder(BorderFactory.createTitledBorder("Usuário"));
+        usuario.setBounds(100, 140, 300, 55);
+
+        JPasswordField senha = new JPasswordField();
+        senha.setBorder(BorderFactory.createTitledBorder("Senha"));
+        senha.setBounds(100, 220, 300, 55);
+
+        JButton entrar = new JButton("Entrar");
+        entrar.setBounds(100, 310, 300, 45);
+
+        JButton cadastrar = new JButton("Cadastrar");
+        cadastrar.setBounds(100, 370, 300, 45);
+
+        entrar.setBackground(new Color(0,121,107));
+        entrar.setForeground(Color.WHITE);
+
+        cadastrar.setBackground(new Color(33,150,243));
+        cadastrar.setForeground(Color.WHITE);
+
+        entrar.addActionListener(e -> {
+            String user = usuario.getText().trim();
+            String pass = new String(senha.getPassword()).trim();
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha usuário e senha.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (user.equalsIgnoreCase("admin") && pass.equals("123")) {
+                JOptionPane.showMessageDialog(this, "Login de Administrador");
+                new BibliotecaFrame(true, userService);
+                dispose();
+                return;
+            }
+
+            if (userService.login(user, pass)) {
+                JOptionPane.showMessageDialog(this, "Login realizado.");
+                new BibliotecaFrame(false, userService);
+                dispose();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         });
 
-        // Adicionando tudo à janela
-        add(panel, BorderLayout.CENTER);
-        
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.add(btnLogin);
-        add(bottomPanel, BorderLayout.SOUTH);
+        cadastrar.addActionListener(e -> {
+            new CadastroFrame(userService);
+            dispose();
+        });
+
+        direita.add(titulo);
+        direita.add(usuario);
+        direita.add(senha);
+        direita.add(entrar);
+        direita.add(cadastrar);
+
+        add(esquerda, BorderLayout.WEST);
+        add(direita, BorderLayout.CENTER);
+
+        setVisible(true);
     }
 }

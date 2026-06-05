@@ -39,4 +39,16 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public Integer getProfileId() {
+        return profileId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }
