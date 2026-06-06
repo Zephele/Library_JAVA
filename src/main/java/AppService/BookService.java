@@ -1,36 +1,20 @@
 package AppService;
 
 import Infra.Entities.Book;
-import Repository.BookRepository;
-import org.springframework.stereotype.Service;
+import Repository.BookDAO;
 import java.util.List;
 
-@Service
 public class BookService {
-    private final BookRepository repository;
 
-    public BookService(BookRepository repository) {
-        this.repository = repository;
+    private final BookDAO bookDAO;
+
+    // O construtor agora pede o DAO
+    public BookService(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 
     public List<Book> listarTodos() {
-        return repository.findAll();
-    }
-
-    // Para a funcionalidade UPDATE do CRUD
-    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao) {
-        repository.findById(id).ifPresent(livro -> {
-            livro.setNome(nome);
-            livro.setAutor(autor);
-            livro.setAno(ano);
-            livro.setDescricao(descricao);
-            repository.save(livro);
-        });
-    }
-
-    // Para o Dashboard
-    public long contarLivros() {
-        return repository.count();
+        return bookDAO.listarTodos();
     }
 
     public void salvarLivro(String nome, String autor, String ano, String descricao, String caminhoImagem) {
@@ -40,11 +24,19 @@ public class BookService {
         livro.setAno(ano);
         livro.setDescricao(descricao);
         livro.setCaminhoImagem(caminhoImagem);
-        repository.save(livro);
+        
+        bookDAO.salvarLivro(livro);
     }
-    
-    // Método para o botão de "Excluir" funcionar de verdade
+
+    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao) {
+        bookDAO.atualizarLivro(id, nome, autor, ano, descricao);
+    }
+
     public void deletarLivro(Long id) {
-        repository.deleteById(id);
+        bookDAO.deletarLivro(id);
+    }
+
+    public long contarLivros() {
+        return bookDAO.contarLivros();
     }
 }

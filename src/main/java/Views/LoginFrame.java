@@ -3,12 +3,10 @@ package Views;
 import AppService.UserService;
 import Infra.Entities.User;
 import AppService.BookService;
-import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 
-@Component
 public class LoginFrame extends JFrame {
 
     private final UserService userService;
