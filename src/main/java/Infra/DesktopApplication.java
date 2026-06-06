@@ -15,8 +15,12 @@ public class DesktopApplication {
         BookDAO bookDAO = new BookDAO();
         BookService bookService = new BookService(bookDAO);
 
+        Repository.CategoriaDAO categoriaDAO = new Repository.CategoriaDAO();
+        AppService.CategoriaService categoriaService = new AppService.CategoriaService(categoriaDAO);
+
         javax.swing.SwingUtilities.invokeLater(() -> {
-            LoginFrame loginFrame = new LoginFrame(userService, bookService);
+            // Passe o categoriaService também!
+            LoginFrame loginFrame = new LoginFrame(userService, bookService, categoriaService);
             loginFrame.setVisible(true);
         });
     }

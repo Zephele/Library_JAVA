@@ -3,17 +3,20 @@ package Views;
 import javax.swing.*;
 import AppService.UserService;
 import AppService.BookService;
+import AppService.CategoriaService;
 import java.awt.*;
 
 public class CadastroFrame extends JFrame {
 
     private final UserService userService;
     private final BookService bookService;
+    private final CategoriaService categoriaService;
 
 
-    public CadastroFrame(UserService userService, BookService bookService) {
+    public CadastroFrame(UserService userService, BookService bookService, CategoriaService categoriaService) {
         this.userService = userService;
         this.bookService = bookService;
+        this.categoriaService = categoriaService;
 
         setTitle("Cadastro");
         setSize(900, 500);
@@ -74,7 +77,7 @@ public class CadastroFrame extends JFrame {
             try {
                 userService.cadastrar(user, pass);
                 JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
-                new LoginFrame(userService, bookService);
+                new LoginFrame(userService, bookService, categoriaService);
                 dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar no banco: " + ex.getMessage(), "Erro Crítico", JOptionPane.ERROR_MESSAGE);
@@ -82,7 +85,7 @@ public class CadastroFrame extends JFrame {
         });
 
         voltar.addActionListener(e -> {
-            new LoginFrame(userService, bookService);
+            new LoginFrame(userService, bookService, categoriaService);
             dispose();
         });
 

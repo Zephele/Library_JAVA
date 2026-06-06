@@ -4,6 +4,7 @@ import javax.swing.*;
 import AppService.UserService;
 import AppService.BookService;
 import Infra.Entities.Book;
+import AppService.CategoriaService;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -17,12 +18,14 @@ public class BibliotecaFrame extends JFrame {
     private JPanel painelLivros;
     private JLabel contadorLivros;
     private boolean admin;
+    private final CategoriaService categoriaService;
 
-    public BibliotecaFrame(boolean admin, UserService userService, BookService bookService) {
+    public BibliotecaFrame(boolean admin, UserService userService, BookService bookService, CategoriaService categoriaService) {
 
         this.admin = admin;
         this.userService = userService;
         this.bookService = bookService;
+        this.categoriaService = categoriaService;
 
         setTitle("Biblioteca Digital");
         setSize(1200, 700);
@@ -53,9 +56,16 @@ public class BibliotecaFrame extends JFrame {
         btnDashboard.setBackground(new Color(0, 150, 136));
         btnDashboard.setForeground(Color.WHITE);
         
+        JButton btnCategorias = new JButton(" Categorias");
+        adicionar.setBackground(new Color(46, 125, 50)); adicionar.setForeground(Color.WHITE);
+        sair.setBackground(new Color(198, 40, 40)); sair.setForeground(Color.WHITE);
+        btnDashboard.setBackground(new Color(0, 150, 136)); btnDashboard.setForeground(Color.WHITE);
+        btnCategorias.setBackground(new Color(25, 118, 210)); btnCategorias.setForeground(Color.WHITE);
+
         if (!admin) {
             adicionar.setVisible(false);
             btnDashboard.setVisible(false);
+            btnCategorias.setVisible(false);
         }
         
         menu.add(logo);
@@ -63,6 +73,10 @@ public class BibliotecaFrame extends JFrame {
         menu.add(btnDashboard);
         menu.add(adicionar);
         menu.add(sair);
+
+        btnCategorias.addActionListener(e -> {
+            new GestaoCategoriasFrame(categoriaService); // Abre a nova janela
+        });
 
         btnDashboard.addActionListener(e -> {
             new DashboardFrame(userService, bookService);
@@ -74,7 +88,7 @@ public class BibliotecaFrame extends JFrame {
         menu.add(sair);
 
         sair.addActionListener(e -> {
-            LoginFrame login = new LoginFrame(userService, bookService);
+            LoginFrame login = new LoginFrame(userService, bookService, categoriaService);
             login.setVisible(true);
             dispose();
         });

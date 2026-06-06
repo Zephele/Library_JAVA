@@ -2,6 +2,7 @@ package Views;
 
 import AppService.UserService;
 import Infra.Entities.User;
+import AppService.CategoriaService;
 import AppService.BookService;
 
 import javax.swing.*;
@@ -11,10 +12,12 @@ public class LoginFrame extends JFrame {
 
     private final UserService userService;
     private final BookService bookService;
+    private final CategoriaService categoriaService;
 
-    public LoginFrame(UserService userService, BookService bookService) {
+    public LoginFrame(UserService userService, BookService bookService, CategoriaService categoriaService) {
         this.userService = userService;
         this.bookService = bookService;
+        this.categoriaService = categoriaService;
 
         setTitle("Biblioteca Digital");
         setSize(900, 500);
@@ -74,7 +77,7 @@ public class LoginFrame extends JFrame {
                 
                 if (utilizadorLogado != null) {
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso.");
-                    new BibliotecaFrame(utilizadorLogado.isAdmin(), userService, bookService);
+                    new BibliotecaFrame(utilizadorLogado.isAdmin(), userService, bookService, categoriaService);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Utilizador ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -85,7 +88,7 @@ public class LoginFrame extends JFrame {
         });
 
         cadastrar.addActionListener(e -> {
-            new CadastroFrame(userService, bookService);
+            new CadastroFrame(userService, bookService, categoriaService);
             dispose();
         });
 
