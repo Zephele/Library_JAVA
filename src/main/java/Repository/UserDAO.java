@@ -9,17 +9,14 @@ public class UserDAO {
     public User autenticar(String username, String password) {
         String sql = "SELECT * FROM User WHERE username = ? AND password = ? AND is_active = 1";
         
-        // Abre a conexão com o banco
         try (Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             
-            // Substitui os "?" pelos valores digitados
             stmt.setString(1, username);
             stmt.setString(2, password);
             
             ResultSet rs = stmt.executeQuery();
             
-            // Se encontrou alguém no banco, monta o objeto User e devolve
             if (rs.next()) {
                 User user = new User();
                 user.setId(rs.getLong("id"));
@@ -32,7 +29,7 @@ public class UserDAO {
         } catch (SQLException e) {
             System.err.println("Erro ao autenticar: " + e.getMessage());
         }
-        return null; // Retorna null se não encontrou o utilizador
+        return null;
     }
 
     public void cadastrar(User user) {
@@ -47,9 +44,24 @@ public class UserDAO {
             stmt.setBoolean(4, user.isActive());
             stmt.setBoolean(5, user.isAdmin());
             
-            stmt.executeUpdate(); // Executa o insert no MySQL
+            stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erro ao cadastrar: " + e.getMessage());
         }
+    }
+
+    public long contarUsuarios() {
+        String sql = "SELECT COUNT(*) FROM User";
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao contar utilizadores: " + e.getMessage());
+        }
+        return 0;
     }
 }

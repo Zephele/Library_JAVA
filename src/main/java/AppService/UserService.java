@@ -9,11 +9,10 @@ public class UserService {
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
-        initAdmin(); // Tenta criar o admin assim que o serviço inicia
+        initAdmin();
     }
 
     public void initAdmin() {
-        // Se a base não tiver o admin, ele recria
         if (userDAO.autenticar("admin", "123") == null) {
             User admin = new User();
             admin.setUsername("admin");
@@ -40,6 +39,6 @@ public class UserService {
     }
 
     public long contarUsuarios() {
-        return 0; // Pode implementar o SQL COUNT no UserDAO futuramente
+        return userDAO.contarUsuarios();
     }
 }

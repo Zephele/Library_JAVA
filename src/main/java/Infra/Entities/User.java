@@ -2,7 +2,7 @@ package Infra.Entities;
 
 import lombok.Data;
 
-@Data // O Lombok continua a criar os Getters e Setters
+@Data
 public class User {
     private Long id;
     private String username;

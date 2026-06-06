@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
     
-    // Substitua os dados se o seu utilizador ou senha do MySQL forem diferentes
     private static final String URL = "jdbc:mysql://localhost:3306/library";
     private static final String USER = "library_user";
     private static final String PASS = "123456";

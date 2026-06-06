@@ -8,7 +8,6 @@ public class BookService {
 
     private final BookDAO bookDAO;
 
-    // O construtor agora pede o DAO
     public BookService(BookDAO bookDAO) {
         this.bookDAO = bookDAO;
     }
@@ -28,8 +27,8 @@ public class BookService {
         bookDAO.salvarLivro(livro);
     }
 
-    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao) {
-        bookDAO.atualizarLivro(id, nome, autor, ano, descricao);
+    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao, String caminhoImagem) {
+        bookDAO.atualizarLivro(id, nome, autor, ano, descricao, caminhoImagem);
     }
 
     public void deletarLivro(Long id) {

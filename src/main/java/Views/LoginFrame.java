@@ -60,7 +60,6 @@ public class LoginFrame extends JFrame {
         cadastrar.setBackground(new Color(33,150,243));
         cadastrar.setForeground(Color.WHITE);
 
-// Substitua o bloco do "entrar.addActionListener" por este:
         entrar.addActionListener(e -> {
             String user = usuario.getText().trim();
             String pass = new String(senha.getPassword()).trim();
@@ -71,12 +70,10 @@ public class LoginFrame extends JFrame {
             }
 
             try {
-                // Autenticação real pela base de dados
                 User utilizadorLogado = userService.autenticar(user, pass);
                 
                 if (utilizadorLogado != null) {
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso.");
-                    // Passamos se ele é admin ou não lendo do objeto
                     new BibliotecaFrame(utilizadorLogado.isAdmin(), userService, bookService);
                     dispose();
                 } else {
@@ -88,7 +85,7 @@ public class LoginFrame extends JFrame {
         });
 
         cadastrar.addActionListener(e -> {
-            new CadastroFrame(userService, bookService); // <-- Precisa enviar os dois!
+            new CadastroFrame(userService, bookService);
             dispose();
         });
 

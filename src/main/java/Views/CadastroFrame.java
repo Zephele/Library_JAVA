@@ -2,15 +2,15 @@ package Views;
 
 import javax.swing.*;
 import AppService.UserService;
-import AppService.BookService; // Import adicionado
+import AppService.BookService;
 import java.awt.*;
 
 public class CadastroFrame extends JFrame {
 
     private final UserService userService;
-    private final BookService bookService; // Serviço adicionado
+    private final BookService bookService;
 
-    // Construtor agora pede os dois serviços
+
     public CadastroFrame(UserService userService, BookService bookService) {
         this.userService = userService;
         this.bookService = bookService;
@@ -74,7 +74,6 @@ public class CadastroFrame extends JFrame {
             try {
                 userService.cadastrar(user, pass);
                 JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
-                // Repassa os dois serviços ao abrir o Login novamente
                 new LoginFrame(userService, bookService);
                 dispose();
             } catch (Exception ex) {
@@ -83,7 +82,6 @@ public class CadastroFrame extends JFrame {
         });
 
         voltar.addActionListener(e -> {
-            // Repassa os dois serviços ao abrir o Login novamente
             new LoginFrame(userService, bookService);
             dispose();
         });

@@ -51,8 +51,8 @@ public class BookDAO {
         }
     }
 
-    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao) {
-        String sql = "UPDATE Book SET nome = ?, autor = ?, ano = ?, descricao = ? WHERE id = ?";
+    public void atualizarLivro(Long id, String nome, String autor, String ano, String descricao, String caminhoImagem) {
+        String sql = "UPDATE Book SET nome = ?, autor = ?, ano = ?, descricao = ?, caminho_imagem = ? WHERE id = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -61,7 +61,8 @@ public class BookDAO {
             stmt.setString(2, autor);
             stmt.setString(3, ano);
             stmt.setString(4, descricao);
-            stmt.setLong(5, id);
+            stmt.setString(5, caminhoImagem);
+            stmt.setLong(6, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {

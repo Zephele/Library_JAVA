@@ -22,7 +22,7 @@ public class BibliotecaFrame extends JFrame {
 
         this.admin = admin;
         this.userService = userService;
-        this.bookService = bookService; // Injetando o serviço
+        this.bookService = bookService;
 
         setTitle("Biblioteca Digital");
         setSize(1200, 700);
@@ -55,16 +55,15 @@ public class BibliotecaFrame extends JFrame {
         
         if (!admin) {
             adicionar.setVisible(false);
-            btnDashboard.setVisible(false); // Só o admin vê o dashboard
+            btnDashboard.setVisible(false);
         }
         
         menu.add(logo);
         menu.add(new JLabel());
-        menu.add(btnDashboard); // Adiciona o botão ao menu lateral
+        menu.add(btnDashboard);
         menu.add(adicionar);
         menu.add(sair);
 
-        // AÇÃO DO DASHBOARD
         btnDashboard.addActionListener(e -> {
             new DashboardFrame(userService, bookService);
         });
@@ -76,8 +75,8 @@ public class BibliotecaFrame extends JFrame {
 
         sair.addActionListener(e -> {
             LoginFrame login = new LoginFrame(userService, bookService);
-            login.setVisible(true); // Garante que a tela de login vai aparecer na frente
-            dispose(); // Destrói a tela da biblioteca
+            login.setVisible(true);
+            dispose();
         });
 
         JPanel topo = new JPanel(new BorderLayout());
@@ -87,7 +86,6 @@ public class BibliotecaFrame extends JFrame {
 
         painelLivros = new JPanel();
         painelLivros.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        // O 0 indica linhas infinitas, 3 colunas
         painelLivros.setLayout(new GridLayout(0, 3, 20, 20)); 
 
         JScrollPane scrollPane = new JScrollPane(painelLivros);
@@ -100,10 +98,8 @@ public class BibliotecaFrame extends JFrame {
         centro.add(scrollPane, BorderLayout.CENTER);
         centro.add(contadorLivros, BorderLayout.SOUTH);
 
-        // Carrega os livros do banco de dados na inicialização
         atualizarPainelLivros();
 
-        // AÇÃO DE ADICIONAR NOVO LIVRO
         adicionar.addActionListener(e -> {
 
             String nome = JOptionPane.showInputDialog(this, "Nome do Livro:");
@@ -118,43 +114,35 @@ public class BibliotecaFrame extends JFrame {
             String descricao = JOptionPane.showInputDialog(this, "Descrição:");
             if (descricao == null || descricao.trim().isEmpty()) return;
 
-            // NOVO: Abre o explorador de arquivos para escolher a foto
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Selecione a capa do livro");
             
-            // Filtro para mostrar apenas imagens
             fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens (*.jpg, *.png)", "jpg", "jpeg", "png"));
 
-            String caminhoImagem = "/imagens/domcasmurro.jpg"; // Imagem padrão caso ele cancele
+            String caminhoImagem = "/imagens/domcasmurro.jpg";
             
-            // Exibe a janela. Se o usuário clicar em "Abrir" (APPROVE_OPTION), pegamos o caminho absoluto
             int userSelection = fileChooser.showOpenDialog(this);
             if (userSelection == JFileChooser.APPROVE_OPTION) {
-                // Pega o caminho completo do arquivo no PC (ex: C:\Users\Rafael\Imagens\capa.png)
                 caminhoImagem = fileChooser.getSelectedFile().getAbsolutePath();
             }
 
-            // Salva no banco de dados com a imagem escolhida!
             bookService.salvarLivro(nome, autor, ano, descricao, caminhoImagem);
 
-            // Recarrega a tela para mostrar o livro novo
             atualizarPainelLivros();
         });
-        // Adiciona painéis principais e mostra a janela
         add(menu, BorderLayout.WEST);
         add(centro, BorderLayout.CENTER);
 
         setVisible(true);
     }
 
-    // MÉTODO QUE FAZ O LAÇO DE REPETIÇÃO (FOR) NO BANCO DE DADOS
     private void atualizarPainelLivros() {
-        painelLivros.removeAll(); // Limpa a tela
+        painelLivros.removeAll();
         
-        List<Book> livrosNoBanco = bookService.listarTodos(); // Busca no MySQL
+        List<Book> livrosNoBanco = bookService.listarTodos();
         
         for (Book livro : livrosNoBanco) {
-            painelLivros.add(criarCard(livro)); // Cria e adiciona um card para cada livro
+            painelLivros.add(criarCard(livro));
         }
         
         painelLivros.revalidate();
@@ -162,7 +150,6 @@ public class BibliotecaFrame extends JFrame {
         contadorLivros.setText("Total de Livros: " + livrosNoBanco.size());
     }
 
-    // O método criar card agora recebe o Objeto Book
     private JPanel criarCard(Book livro) {
 
         JPanel card = new JPanel(new BorderLayout());
@@ -199,20 +186,33 @@ public class BibliotecaFrame extends JFrame {
                             null, opcoes, opcoes[0]
                     );
 
-                    if (escolha == 0) { // Detalhes
+                    if (escolha == 0) {
                         mostrarDetalhes(livro);
-                    } else if (escolha == 1) { // Editar (O UPDATE DO CRUD!)
+                    } else if (escolha == 1) {
                         String novoNome = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Nome:", livro.getNome());
+                        if (novoNome == null) return;
+                        
                         String novoAutor = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Autor:", livro.getAutor());
                         String novoAno = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Ano:", livro.getAno());
                         String novaDescricao = JOptionPane.showInputDialog(BibliotecaFrame.this, "Nova Descrição:", livro.getDescricao());
                         
-                        if (novoNome != null && novoAutor != null) {
-                            bookService.atualizarLivro(livro.getId(), novoNome, novoAutor, novoAno, novaDescricao);
-                            atualizarPainelLivros(); // Atualiza o ecrã
-                            JOptionPane.showMessageDialog(BibliotecaFrame.this, "Livro atualizado!");
+                        String novoCaminhoImagem = livro.getCaminhoImagem();
+                        
+                        int mudarFoto = JOptionPane.showConfirmDialog(BibliotecaFrame.this, "Deseja alterar a foto da capa?", "Alterar Foto", JOptionPane.YES_NO_OPTION);
+                        
+                        if (mudarFoto == JOptionPane.YES_OPTION) {
+                            JFileChooser fileChooser = new JFileChooser();
+                            fileChooser.setDialogTitle("Selecione a nova capa");
+                            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "jpeg", "png"));
+                            if (fileChooser.showOpenDialog(BibliotecaFrame.this) == JFileChooser.APPROVE_OPTION) {
+                                novoCaminhoImagem = fileChooser.getSelectedFile().getAbsolutePath();
+                            }
                         }
-                    } else if (escolha == 2) { // Excluir
+                        
+                        bookService.atualizarLivro(livro.getId(), novoNome, novoAutor, novoAno, novaDescricao, novoCaminhoImagem);
+                        atualizarPainelLivros();
+                        JOptionPane.showMessageDialog(BibliotecaFrame.this, "Livro atualizado com sucesso!");
+                    } else if (escolha == 2) {
                         bookService.deletarLivro(livro.getId());
                         atualizarPainelLivros();
                     }
@@ -237,12 +237,10 @@ public class BibliotecaFrame extends JFrame {
 
     private ImageIcon carregarImagem(String caminho) {
         try {
-            // 1º Tenta carregar da pasta interna resources (para os livros que já vinham no código)
             var url = getClass().getResource(caminho);
             if (url != null) {
                 return new ImageIcon(url);
             } else {
-                // 2º Tenta carregar direto do disco rígido (para os livros novos adicionados pelo FileChooser)
                 java.io.File arquivoFisico = new java.io.File(caminho);
                 if (arquivoFisico.exists()) {
                     return new ImageIcon(caminho);
@@ -252,7 +250,6 @@ public class BibliotecaFrame extends JFrame {
             System.err.println("Erro ao carregar imagem: " + caminho);
         }
         
-        // Retorna um quadrado em branco como placeholder se a imagem não existir
         return new ImageIcon(new java.awt.image.BufferedImage(140, 190, java.awt.image.BufferedImage.TYPE_INT_RGB));
     }
 }
