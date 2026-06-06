@@ -1,6 +1,7 @@
 package Views;
 
 import AppService.UserService;
+import Infra.Entities.User;
 import AppService.BookService;
 import org.springframework.stereotype.Component;
 
@@ -61,29 +62,30 @@ public class LoginFrame extends JFrame {
         cadastrar.setBackground(new Color(33,150,243));
         cadastrar.setForeground(Color.WHITE);
 
+// Substitua o bloco do "entrar.addActionListener" por este:
         entrar.addActionListener(e -> {
             String user = usuario.getText().trim();
             String pass = new String(senha.getPassword()).trim();
 
-            if (user.equalsIgnoreCase("admin") && pass.equals("123")) {
-                // PASSE O BOOKSERVICE AQUI
-                new BibliotecaFrame(true, userService, bookService); 
-                dispose();
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha utilizador e senha.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             try {
-                if (userService.login(user, pass)) {
-                    // PASSE O BOOKSERVICE AQUI
-                    new BibliotecaFrame(false, userService, bookService);
+                // Autenticação real pela base de dados
+                User utilizadorLogado = userService.autenticar(user, pass);
+                
+                if (utilizadorLogado != null) {
+                    JOptionPane.showMessageDialog(this, "Login realizado com sucesso.");
+                    // Passamos se ele é admin ou não lendo do objeto
+                    new BibliotecaFrame(utilizadorLogado.isAdmin(), userService, bookService);
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Utilizador ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
-                // Se der erro de conexão com o banco, agora você verá a mensagem!
-                JOptionPane.showMessageDialog(this, "Falha de conexão com o Banco de Dados:\n" + ex.getMessage(), "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Falha de conexão:\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 

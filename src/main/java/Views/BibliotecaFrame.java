@@ -49,9 +49,25 @@ public class BibliotecaFrame extends JFrame {
         sair.setBackground(new Color(198, 40, 40));
         sair.setForeground(Color.WHITE);
 
+        JButton btnDashboard = new JButton(" Dashboard");
+        btnDashboard.setBackground(new Color(0, 150, 136));
+        btnDashboard.setForeground(Color.WHITE);
+        
         if (!admin) {
             adicionar.setVisible(false);
+            btnDashboard.setVisible(false); // Só o admin vê o dashboard
         }
+        
+        menu.add(logo);
+        menu.add(new JLabel());
+        menu.add(btnDashboard); // Adiciona o botão ao menu lateral
+        menu.add(adicionar);
+        menu.add(sair);
+
+        // AÇÃO DO DASHBOARD
+        btnDashboard.addActionListener(e -> {
+            new DashboardFrame(userService, bookService);
+        });
 
         menu.add(logo);
         menu.add(new JLabel());
@@ -175,19 +191,30 @@ public class BibliotecaFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (admin) {
-                    Object[] opcoes = {"Detalhes", "Excluir", "Cancelar"};
+                    Object[] opcoes = {"Detalhes", "Editar", "Excluir", "Cancelar"};
                     int escolha = JOptionPane.showOptionDialog(
                             BibliotecaFrame.this,
-                            livro.getNome(), "Gerenciar Livro",
+                            livro.getNome(), "Gerir Livro",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                             null, opcoes, opcoes[0]
                     );
 
                     if (escolha == 0) { // Detalhes
                         mostrarDetalhes(livro);
-                    } else if (escolha == 1) { // Excluir
-                        bookService.deletarLivro(livro.getId()); // Exclui do banco
-                        atualizarPainelLivros(); // Recarrega a tela
+                    } else if (escolha == 1) { // Editar (O UPDATE DO CRUD!)
+                        String novoNome = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Nome:", livro.getNome());
+                        String novoAutor = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Autor:", livro.getAutor());
+                        String novoAno = JOptionPane.showInputDialog(BibliotecaFrame.this, "Novo Ano:", livro.getAno());
+                        String novaDescricao = JOptionPane.showInputDialog(BibliotecaFrame.this, "Nova Descrição:", livro.getDescricao());
+                        
+                        if (novoNome != null && novoAutor != null) {
+                            bookService.atualizarLivro(livro.getId(), novoNome, novoAutor, novoAno, novaDescricao);
+                            atualizarPainelLivros(); // Atualiza o ecrã
+                            JOptionPane.showMessageDialog(BibliotecaFrame.this, "Livro atualizado!");
+                        }
+                    } else if (escolha == 2) { // Excluir
+                        bookService.deletarLivro(livro.getId());
+                        atualizarPainelLivros();
                     }
                 } else {
                     mostrarDetalhes(livro);

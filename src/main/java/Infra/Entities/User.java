@@ -30,6 +30,8 @@ public class User {
     @JsonIgnore
     private Integer profileId;
 
+    private boolean isAdmin = false;
+
     @PrePersist
     protected void onCreate() {
         this.creationDate = LocalDateTime.now();
