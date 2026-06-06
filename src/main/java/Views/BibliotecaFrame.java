@@ -71,11 +71,12 @@ public class BibliotecaFrame extends JFrame {
         menu.add(logo);
         menu.add(new JLabel());
         menu.add(btnDashboard);
+        menu.add(btnCategorias);
         menu.add(adicionar);
         menu.add(sair);
 
         btnCategorias.addActionListener(e -> {
-            new GestaoCategoriasFrame(categoriaService); // Abre a nova janela
+            new GestaoCategoriasFrame(categoriaService);
         });
 
         btnDashboard.addActionListener(e -> {
